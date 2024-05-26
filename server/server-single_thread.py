@@ -1,10 +1,9 @@
 import socket
 
-
 def server():
     # get the hostname
     host = socket.gethostbyname("localhost")
-    port = 5000  # initiate port no above 1024
+    port = 6000  # initiate port no above 1024
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument
@@ -16,14 +15,13 @@ def server():
     conn, address = server_socket.accept()  # accept new connection
     print("Connection from: " + str(address))
     
-    starttime = time.time()
     while True:
         send = conn.recv(1024).decode() 
         if send == 'send data':
             print('start sending data now')
             break
 
-    with open("myfile.txt", "r") as file:
+    with open("../data/myfile.txt", "r") as file:
         for dataline in file:
             conn.send(dataline.encode())  # send data to the client
     
@@ -33,4 +31,7 @@ def server():
 
 
 if __name__ == '__main__':
-    server()
+    try:
+        server()
+    except Exception as e:
+        print("Exception occured:", e)

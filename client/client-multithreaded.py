@@ -1,8 +1,13 @@
+# simulation of multiple clients using threading
 import socket
 import time
 
+from _thread import *
+import threading
 
-def client():
+lock = threading.Lock()
+
+def client(i):
     host = socket.gethostbyname("localhost")  # as both code is running on same pc
     port = 6000  # socket server port number
 
@@ -18,14 +23,21 @@ def client():
         if data == "stop":
             break
         elif data:
-           print(data)  # show in terminal
-
-    stop = "stop"  #request to stop sending data
-    client_socket.send(stop.encode())
+           lock.acquire()
+           print("processing client:", i)  # show in terminal
+           lock.release()
 
     client_socket.close()  # close the connection
 
 
 if __name__ == '__main__':
-    client()
+    start = time.time()
+    for i in range(1,3):
+        t = threading.Thread(target=client, args=(i,))
+        t.start()
+    for thread in threading.enumerate():
+        if thread != threading.current_thread():
+            thread.join()
+    end = time.time()
+    print("response time:", (end-start)*1000)
     
