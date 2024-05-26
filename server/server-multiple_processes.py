@@ -5,7 +5,7 @@ import time
 # import process module
 import multiprocessing
 
-def process_request(conn, i):
+def process_request(conn):
     with open("../data/myfile.txt", "r") as file:
             for dataline in file:
                 time.sleep(1) #simulating cpu bound operation
@@ -25,14 +25,12 @@ def server():
     # configure how many client the server can listen simultaneously
     server_socket.listen(2000)
     
-    cnt = 0
     while True:
         conn, address = server_socket.accept()  # accept new connection
         print("Connection from: " + str(address))
         send = conn.recv(1024).decode() 
         if send == 'send data':
-            cnt = cnt + 1
-            prc = multiprocessing.Process(target=process_request, args=(conn, cnt, ) )
+            prc = multiprocessing.Process(target=process_request, args=(conn, ) )
             prc.start()
         elif send == 'stop':
             break
