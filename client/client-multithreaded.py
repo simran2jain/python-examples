@@ -9,7 +9,7 @@ lock = threading.Lock()
 
 def client(i):
     host = socket.gethostbyname("localhost")  # as both code is running on same pc
-    port = 6000  # socket server port number
+    port = 3001  # socket server port number
 
     client_socket = socket.socket()  # instantiate
     client_socket.connect((host, port))  # connect to the server
@@ -32,7 +32,7 @@ def client(i):
 
 if __name__ == '__main__':
     start = time.time()
-    for i in range(1,3):
+    for i in range(1,10):
         t = threading.Thread(target=client, args=(i,))
         t.start()
     for thread in threading.enumerate():

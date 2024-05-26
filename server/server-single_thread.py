@@ -3,7 +3,7 @@ import socket
 def server():
     # get the hostname
     host = socket.gethostbyname("localhost")
-    port = 6000  # initiate port no above 1024
+    port = 3001  # initiate port no above 1024
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument

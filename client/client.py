@@ -4,7 +4,7 @@ import time
 
 def client():
     host = socket.gethostbyname("localhost")  # as both code is running on same pc
-    port = 6000  # socket server port number
+    port = 3001  # socket server port number
 
     client_socket = socket.socket()  # instantiate
     client_socket.connect((host, port))  # connect to the server

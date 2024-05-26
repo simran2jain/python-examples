@@ -8,7 +8,7 @@ import multiprocessing
 def process_request(conn):
     with open("../data/myfile.txt", "r") as file:
             for dataline in file:
-                time.sleep(1) #simulating cpu bound operation
+                time.sleep(0.5) #simulating cpu bound operation
                 conn.send(dataline.encode())  # send data to the client
     data = "stop"
     conn.send(data.encode())
@@ -16,7 +16,7 @@ def process_request(conn):
 def server():
     # get the hostname
     host = socket.gethostbyname("localhost")
-    port = 6000  # initiate port no above 1024
+    port = 3001  # initiate port no above 1024
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument

@@ -8,6 +8,7 @@ import threading
 def process_request(conn):
     with open("../data/myfile.txt", "r") as file:
             for dataline in file:
+                time.sleep(0.5)
                 conn.send(dataline.encode())  # send data to the client
     data = "stop"
     conn.send(data.encode())
@@ -15,7 +16,7 @@ def process_request(conn):
 def server():
     # get the hostname
     host = socket.gethostbyname("localhost")
-    port = 6000  # initiate port no above 1024
+    port = 3001  # initiate port no above 1024
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument
@@ -42,5 +43,5 @@ if __name__ == '__main__':
         print("exception occured:",e)
     finally:
         for thread in threading.enumerate():
-            if thread != threading.current_thread()
+            if thread != threading.current_thread():
                 thread.join()
