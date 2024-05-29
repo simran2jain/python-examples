@@ -1,7 +1,8 @@
 # Python Examples
 
-## This repository contains code samples for three client/server scenarios.
-### In general, clients request data using "send data" and the server then reads the input file and sends each string in it to the server. Sleep has been introduced in the process_request function by the client to simulate CPU operation.
+## this repository has code samples for following client/server scenarios:
+### In general, client request data using "send data" then server reads the input file and sends each string in it to client. Sleep has been introduced in process_request function by client to simulate CPU operation.
+
 
 CASE 1: Single-thread client and single-threaded server
 Instructions - Run server/server-single_thread.py in one window and then client/client.py in another
