@@ -4,6 +4,7 @@ import time
 
 from _thread import *
 import threading
+import time
 
 lock = threading.Lock()
 
@@ -27,12 +28,14 @@ def client(i):
            print("processing client:", i)  # show in terminal
            lock.release()
 
+    send = "stop"  #request to send data
+    client_socket.send(send.encode())
     client_socket.close()  # close the connection
 
 
 if __name__ == '__main__':
     start = time.time()
-    for i in range(1,10):
+    for i in range(1,4):
         t = threading.Thread(target=client, args=(i,))
         t.start()
     for thread in threading.enumerate():
